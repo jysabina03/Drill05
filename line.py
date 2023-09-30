@@ -46,17 +46,17 @@ while running:
     clear_canvas()
     tuk_ground.draw(TUK_WIDTH//2,TUK_HEICHT//2)
 
-    if handX == nowX and handY == nowY:
+    if int(handX) == int(nowX) and int(handY) == int(nowY):
         make_hand()
     make_load((nowX,nowY),(handX,handY))
-    speed+=4
+    speed+=5
 
     hand.clip_draw(0, 0, 50, 52, handX, handY)
 
     if dir_see == 1:
-        character.clip_draw(frame * 100, 0, 100, 100, nowX, nowY)
-    else:
         character.clip_composite_draw(frame * 100, 0, 100, 100, 0,'h',nowX, nowY,100,100)
+    else:
+        character.clip_draw(frame * 100, 0, 100, 100, nowX, nowY)
 
     frame = (frame + 1) % 8
     update_canvas()
