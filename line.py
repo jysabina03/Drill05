@@ -34,6 +34,17 @@ def make_load(p1,p2):
     nowX, nowY =x,y
 
 
+def handle_events():
+    global running
+
+    events = get_events()
+    for event in events:
+        if event.type == SDL_QUIT:
+            running = False
+        elif event.type == SDL_KEYDOWN and event.key == SDLK_ESCAPE:
+            running = False
+
+
 running = True
 charX,charY = TUK_WIDTH // 2,TUK_HEICHT//2
 handX,handY = charX,charY
@@ -46,7 +57,7 @@ while running:
     clear_canvas()
     tuk_ground.draw(TUK_WIDTH//2,TUK_HEICHT//2)
 
-    if int(handX) == int(nowX) and int(handY) == int(nowY):
+    if abs(handX - nowX) < 2 and abs(handY - nowY) < 2:
         make_hand()
     make_load((nowX,nowY),(handX,handY))
     speed+=5
@@ -60,6 +71,8 @@ while running:
 
     frame = (frame + 1) % 8
     update_canvas()
+
+    handle_events()
     delay(0.1)
 
 
